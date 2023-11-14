@@ -28,7 +28,7 @@ class GroupViewSet(viewsets.ModelViewSet):
 def register(request):
     data = request.data
     if CustomUser.objects.filter(email=data['email']).exists():
-        return Response({'message': 'E-mail já está em uso'}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({'E-mail já está em uso'}, status=status.HTTP_400_BAD_REQUEST)
 
     user = CustomUser.objects.create_user(
         email=data['email'],
@@ -40,7 +40,7 @@ def register(request):
     payload = jwt_payload_handler(user)
     token = jwt_encode_handler(payload)
 
-    return Response({'toke': token}, status=status.HTTP_201_CREATED)
+    return Response({'Usuario cadastrado com sucesso'}, status=status.HTTP_201_CREATED)
 
 
 class CustomAuthToken(ObtainAuthToken):
@@ -60,4 +60,4 @@ class CustomAuthToken(ObtainAuthToken):
             }
             return Response({'user': user_data}, status=status.HTTP_200_OK)
         else:
-            return Response({'detail': 'Credenciais inválidas'}, status=status.HTTP_401_UNAUTHORIZED)
+            return Response({'Email ou senha invalido'}, status=status.HTTP_401_UNAUTHORIZED)
