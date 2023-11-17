@@ -56,8 +56,7 @@ class CustomAuthToken(ObtainAuthToken):
             user_data = {
                 'first_name': user.first_name,
                 'last_name': user.last_name,
-                'token': token.key,
             }
-            return Response({'user': user_data}, status=status.HTTP_200_OK)
+            return Response(user_data, status=status.HTTP_200_OK)
         else:
             return Response({'Email ou senha invalido'}, status=status.HTTP_401_UNAUTHORIZED)
