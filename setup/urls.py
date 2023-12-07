@@ -1,7 +1,10 @@
+from django.conf import settings
 from django.urls import include, path
 from rest_framework import routers
 from core.views import UserViewSet, GroupViewSet, register, CustomAuthToken
 from django.contrib import admin
+
+from setup.settings import STATIC_URL
 
 router = routers.DefaultRouter()
 router.register('users', UserViewSet)
